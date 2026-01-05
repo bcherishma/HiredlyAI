@@ -69,7 +69,7 @@ Navigate to the frontend directory:
 cd frontend
 npm install
 ```
-**Environment Variables**: Create a `.env.local` file in `frontend/` if needed (defaults usually work for local dev).
+**Environment Variables**: Create a `.env.local` file in `frontend/` if needed (defaults usually work for local dev)
 
 ### 3. Interview Agent Setup
 Navigate to the interview agent directory:
