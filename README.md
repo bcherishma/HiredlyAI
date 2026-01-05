@@ -13,7 +13,7 @@ Hiredly AI is a comprehensive career preparation platform designed to help job s
 *   **📥 PDF Generation**: Export your fully optimized and formatted resume as a professional PDF. 
 *   **📈 Progress Tracking**: Track your interview scores and practice history over time.
 
-## 🛠️ Tech Stack
+## �🛠️ Tech Stack
 
 ### Backend
 *   **Language**: Python 3.8+
@@ -108,3 +108,14 @@ npm run dev
 3.  **Dashboard**: View your stats, recent applications, and resume status.
 4.  **Optimize**: detailed analysis of your resume against a job description.
 5.  **Interview**: Launch the Mock Interview Agent to practice speaking.
+
+## 💻 Screenshots
+
+<p align="center">
+  <img src="screenshots/Screenshot%202026-01-05%20142752.png" width="45%" />
+  <img src="screenshots/Screenshot%202026-01-05%20142807.png" width="45%" />
+</p>
+<p align="center">
+  <img src="screenshots/Screenshot%202026-01-05%20142843.png" width="45%" />
+  <img src="screenshots/Screenshot%202026-01-05%20142907.png" width="45%" />
+</p>
