@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>{{ personal_info.name }} - Resume</title>
+    <style>
+        /* General Page Layout */
+        @page {
+            margin: 20px;
+            size: A4;
+        }
+
+        body {
+            font-family: 'Helvetica', sans-serif;
+            /* xhtml2pdf standard font */
+            line-height: 1.5;
+            color: #333;
+            background-color: #fff;
+            font-size: 13px;
+        }
+
+        .resume-container {
+            width: 100%;
+        }
+
+        /* Typography */
+        h1 {
+            margin: 0;
+            font-size: 24px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #222;
+            text-align: center;
+            padding-bottom: 5px;
+        }
+
+        h2 {
+            font-size: 16px;
+            text-transform: uppercase;
+            color: #222;
+            border-bottom: 2px solid #333;
+            padding-bottom: 5px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        p,
+        li {
+            font-size: 12px;
+        }
+
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+
+        /* Header Contact Info */
+        .contact-info {
+            text-align: center;
+            font-size: 11px;
+            margin-top: 5px;
+            color: #555;
+        }
+
+        /* Tables for Layout (xhtml2pdf friendlier than flex) */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+
+        td {
+            vertical-align: top;
+        }
+
+        .entry-header td.left {
+            text-align: left;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        .entry-header td.right {
+            text-align: right;
+            font-weight: bold;
+            font-size: 12px;
+        }
+
+        .entry-subheader td.left {
+            text-align: left;
+            font-style: italic;
+            color: #555;
+            font-size: 12px;
+        }
+
+        .entry-subheader td.right {
+            text-align: right;
+            font-style: italic;
+            color: #555;
+            font-size: 12px;
+        }
+
+        /* Lists */
+        ul {
+            margin-top: 2px;
+            margin-bottom: 10px;
+            padding-left: 15px;
+        }
+
+        li {
+            margin-bottom: 2px;
+            list-style-type: disc;
+        }
+
+        .tech-stack {
+            font-size: 11px;
+            font-style: italic;
+            color: #666;
+            margin-bottom: 3px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="resume-container">
+
+        <header>
+            <h1>{{ personal_info.name }}</h1>
+            <div class="contact-info">
+                {{ personal_info.location }} | {{ personal_info.phone }} |
+                <a href="mailto:{{ personal_info.email }}">{{ personal_info.email }}</a> |
+                <a href="{{ personal_info.linkedin }}">{{ personal_info.linkedin }}</a>
+            </div>
+        </header>
+
+        {% if education %}
+        <section>
+            <h2>Education</h2>
+            {% for edu in education %}
+            <div class="entry">
+                <!-- Using Tables for alignment -->
+                <table class="entry-header">
+                    <tr>
+                        <td class="left">{{ edu.institution }}</td>
+                        <td class="right">{{ edu.location }}</td>
+                    </tr>
+                </table>
+                <table class="entry-subheader">
+                    <tr>
+                        <td class="left">{{ edu.degree }}{% if edu.cgpa %}; CGPA: {{ edu.cgpa }}{% endif %}</td>
+                        <td class="right">{{ edu.period }}</td>
+                    </tr>
+                </table>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        {% if experience %}
+        <section>
+            <h2>Experience</h2>
+            {% for exp in experience %}
+            <div class="entry">
+                <table class="entry-header">
+                    <tr>
+                        <td class="left">{{ exp.company }}</td>
+                        <td class="right">{{ exp.location }}</td>
+                    </tr>
+                </table>
+                <table class="entry-subheader">
+                    <tr>
+                        <td class="left">{{ exp.role }}</td>
+                        <td class="right">{{ exp.period }}</td>
+                    </tr>
+                </table>
+                {% if exp.responsibilities %}
+                <ul>
+                    {% for resp in exp.responsibilities %}
+                    <li>{{ resp }}</li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        {% if projects %}
+        <section>
+            <h2>Projects</h2>
+            {% for proj in projects %}
+            <div class="entry">
+                <table class="entry-header">
+                    <tr>
+                        <td class="left">{{ proj.name }}</td>
+                        <td class="right"></td>
+                    </tr>
+                </table>
+                {% if proj.tech_stack %}
+                <div class="tech-stack">Tech Stack: {{ proj.tech_stack|join(', ') if proj.tech_stack is not string else
+                    proj.tech_stack }}</div>
+                {% endif %}
+                <ul>
+                    <!-- Description handling: might be string or list -->
+                    {% if proj.description is sequence and proj.description is not string %}
+                    {% for desc_line in proj.description %}
+                    <li>{{ desc_line }}</li>
+                    {% endfor %}
+                    {% else %}
+                    <li>{{ proj.description }}</li>
+                    {% endif %}
+
+                    {% if proj.achievement %}
+                    <li>{{ proj.achievement }}</li>
+                    {% endif %}
+                </ul>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+        <section>
+            <h2>Technical Skills</h2>
+            <ul class="skills-list">
+                {% if skills.languages %}<li><strong>Languages:</strong> {{ skills.languages|join(', ') }}</li>{% endif
+                %}
+                {% if skills.web_technologies %}<li><strong>Web Technologies:</strong> {{
+                    skills.web_technologies|join(', ') }}</li>{% endif %}
+                {% if skills.databases %}<li><strong>Database:</strong> {{ skills.databases|join(', ') }}</li>{% endif
+                %}
+                {% if skills.tools_and_software %}<li><strong>Software:</strong> {{ skills.tools_and_software|join(', ')
+                    }}</li>{% endif %}
+                {% if skills.ai_ml %}<li><strong>AI & ML:</strong> {{ skills.ai_ml|join(', ') }}</li>{% endif %}
+                {% if skills.cloud %}<li><strong>Cloud:</strong> {{ skills.cloud|join(', ') }}</li>{% endif %}
+                {% if skills.soft_skills %}<li><strong>Soft Skills:</strong> {{ skills.soft_skills|join(', ') }}</li>{%
+                endif %}
+            </ul>
+        </section>
+
+        {% if certifications %}
+        <section>
+            <h2>Courses & Certifications</h2>
+            <ul>
+                {% for cert in certifications %}
+                <!-- Handle both string and object certs -->
+                {% if cert is mapping %}
+                <li>{{ cert.name }} {% if cert.issuer %} - {{ cert.issuer }}{% endif %}</li>
+                {% else %}
+                <li>{{ cert }}</li>
+                {% endif %}
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+        {% if achievements %}
+        <section>
+            <h2>Achievements & Co-Curricular</h2>
+            <ul>
+                {% for ach in achievements %}
+                <li>{{ ach }}</li>
+                {% endfor %}
+            </ul>
+        </section>
+        {% endif %}
+
+    </div>
+
+</body>
+
+</html>

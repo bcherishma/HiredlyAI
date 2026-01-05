@@ -1,0 +1,7 @@
+{
+  "name": "MockMate - AI Interview Simulator",
+  "description": "A real-time voice interview simulator using Gemini Live API to help users practice for job interviews with adaptive personas.",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}

@@ -1,0 +1,35 @@
+# General
+.DS_Store
+Thumbs.db
+*.log
+.vscode/
+.idea/
+
+# Python (Backend)
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+*.db
+.pytest_cache/
+.coverage
+htmlcov/
+instance/
+.adk/
+
+# Node.js (Frontend & Interview Agent)
+node_modules/
+dist/
+dist-ssr/
+build/
+.env.local
+.env.*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local Configs
+*.local
+start_servers.ps1
