@@ -106,7 +106,7 @@ npm run dev
 1.  **Register/Login**: Create an account to save your progress.
 2.  **Onboarding**: Chat with the AI agent to build your profile or upload an existing resume.
 3.  **Dashboard**: View your stats, recent applications, and resume status.
-4.  **Optimize**: detailed analysis of your resume against a job description.
+4.  **Optimize**: Detailed analysis of your resume against a job description.
 5.  **Interview**: Launch the Mock Interview Agent to practice speaking.
 
 ## 💻 Screenshots
